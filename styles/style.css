@@ -330,12 +330,6 @@ nav a:focus-visible::after {
     background: rgba(255, 42, 42, 0.34);
 }
 
-.card:hover::after {
-    background:
-            linear-gradient(135deg, transparent 0 44%, rgba(255, 42, 42, 0.06) 50%, transparent 56% 100%),
-            linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent),
-            var(--bg-soft);
-}
 
 .card h4 {
     margin: 0 0 10px;
@@ -634,4 +628,96 @@ footer > div:last-child {
 
 .modal__close:hover {
     color: var(--text);
+}
+
+.links {
+    margin-top: 64px;
+}
+
+.links h3 {
+    margin: 0 0 18px;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.links-row {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.link-card {
+    position: relative;
+    width: 68px;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-decoration: none;
+    isolation: isolate;
+    z-index: 0;
+
+    clip-path: polygon(0 0, 92% 0, 100% 10%, 100% 100%, 0 100%);
+    transition: transform 0.2s ease;
+}
+
+.link-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    clip-path: inherit;
+    background: var(--border);
+    z-index: -2;
+}
+
+.link-card::after {
+    content: "";
+    position: absolute;
+    inset: 2px;
+    clip-path: inherit;
+    background: var(--bg-soft);
+    z-index: -1;
+    transition: background 0.2s ease;
+}
+
+.link-card img {
+    width: 28px;
+    height: 28px;
+    opacity: 0.85;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.link-card:hover {
+    transform: translateY(-3px);
+}
+
+.link-card:hover::before {
+    background: rgba(255, 42, 42, 0.4);
+}
+
+.link-card:hover img {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+/* единый размер + выравнивание */
+.link-card img {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+
+    /* делает SVG белым */
+    filter: brightness(0) invert(1);
+
+    opacity: 0.9;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.link-card:hover img {
+    transform: scale(1.1);
+    opacity: 1;
 }
