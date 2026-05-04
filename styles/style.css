@@ -589,11 +589,30 @@ footer > div:last-child {
     position: relative;
     width: min(560px, 100%);
     padding: 24px;
-    background: var(--bg-panel);
-    border: 1px solid var(--border-strong);
-    box-shadow: var(--shadow);
+
+    color: #fff;
+
+    /* градиентная "рамка" */
+    background: linear-gradient(90deg, #ff2a2a, #ff6a00);
+
     clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
+    box-shadow: var(--shadow);
     z-index: 1;
+}
+.modal__content::after {
+    content: "";
+    position: absolute;
+    inset: 1px;
+
+    background: var(--bg-panel);
+
+    clip-path: inherit;
+
+    z-index: 0;
+}
+.modal__content > * {
+    position: relative;
+    z-index: 2;
 }
 
 .modal__content h3 {
