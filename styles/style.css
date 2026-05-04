@@ -1,0 +1,574 @@
+:root {
+    --bg: #050505;
+    --bg-soft: rgba(11, 11, 11, 0.92);
+    --bg-panel: rgba(8, 8, 8, 0.94);
+
+    --text: #f0f0f0;
+    --text-dim: #8e8e8e;
+    --text-faint: #666;
+
+    --red: #ff2a2a;
+    --red-soft: #b31212;
+    --red-glow: rgba(255, 42, 42, 0.22);
+
+    --border: rgba(255, 255, 255, 0.08);
+    --border-strong: rgba(255, 42, 42, 0.45);
+
+    --accent: #ff3b3b;
+
+    --radius: 18px;
+    --radius-cut: 16px;
+    --shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+            radial-gradient(circle at top, rgba(255, 42, 42, 0.08), transparent 28%),
+            radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.03), transparent 22%),
+            linear-gradient(180deg, #060606 0%, #040404 100%);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+            linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+    background-size: 70px 70px;
+    opacity: 0.22;
+    mix-blend-mode: screen;
+}
+
+::selection {
+    background: rgba(255, 42, 42, 0.28);
+    color: #fff;
+}
+
+a {
+    color: inherit;
+}
+
+img, svg {
+    display: block;
+    max-width: 100%;
+}
+
+.container {
+    width: min(1200px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 36px 0 56px;
+    position: relative;
+    z-index: 1;
+}
+
+/* HEADER */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 4px 0 16px;
+    border-bottom: 1px solid var(--border);
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.04em;
+    text-transform: lowercase;
+}
+
+.logo {
+    color: var(--red);
+    font-weight: 600;
+    text-shadow: 0 0 18px var(--red-glow);
+    white-space: nowrap;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px 18px;
+}
+
+nav a {
+    position: relative;
+    color: var(--text-dim);
+    text-decoration: none;
+    transition: color 0.18s ease, opacity 0.18s ease, transform 0.18s ease;
+    padding: 4px 0;
+}
+
+nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, var(--red), transparent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.2s ease;
+}
+
+nav a:hover,
+nav a:focus-visible {
+    color: var(--text);
+    transform: translateY(-1px);
+    outline: none;
+}
+
+nav a:hover::after,
+nav a:focus-visible::after {
+    transform: scaleX(1);
+}
+
+/* HERO */
+.hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+    gap: 40px;
+    align-items: center;
+    margin-top: 64px;
+    min-height: 420px;
+}
+
+.hero > div:first-child {
+    max-width: 640px;
+}
+
+.hero p {
+    color: var(--text-dim);
+    margin: 0 0 12px;
+    max-width: 52ch;
+}
+
+.hero h1 {
+    margin: 0 0 18px;
+    font-size: clamp(3rem, 6vw, 5.2rem);
+    line-height: 0.92;
+    letter-spacing: -0.05em;
+    font-weight: 700;
+    text-wrap: balance;
+}
+
+.hero h1 span {
+    color: var(--red);
+    text-shadow: 0 0 20px var(--red-glow);
+}
+
+.status {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 10px 16px;
+    color: #fff;
+    background: #ff2a2a; /* это и есть "обводка" */
+    font-family: "JetBrains Mono", monospace;
+
+    clip-path: polygon(
+            0 0,
+            calc(100% - 12px) 0,
+            100% 12px,
+            100% 100%,
+            12px 100%,
+            0 calc(100% - 12px)
+    );
+}
+
+.status::after {
+    content: attr(data-text); /* чтобы текст не дублировать вручную */
+    position: absolute;
+    inset: 1px; /* толщина обводки (1px = тонкая) */
+
+    background: #000;
+    color: #fff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    clip-path: inherit;
+}
+
+
+.fox {
+    width: min(100%, 420px);
+    aspect-ratio: 1 / 1;
+    margin-left: auto;
+    position: relative;
+    isolation: isolate;
+    z-index: 0;
+    overflow: hidden;
+
+    background: transparent;
+    border: 0;
+    box-shadow: var(--shadow);
+    clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
+}
+
+.fox::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    clip-path: inherit;
+    background: var(--border);
+    z-index: -2;
+    pointer-events: none;
+}
+
+.fox::after {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    clip-path: inherit;
+    background:
+            radial-gradient(circle at 50% 45%, rgba(255, 42, 42, 0.16), transparent 40%),
+            linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.fox img {
+    position: absolute;
+    inset: 1px;
+    width: calc(100% - 2px);
+    height: calc(100% - 2px);
+    object-fit: cover;
+    display: block;
+    z-index: 0;
+}
+
+/* MODULES */
+.modules {
+    margin-top: 84px;
+}
+
+.modules h3 {
+    margin: 0 0 18px;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.card {
+    position: relative;
+    isolation: isolate;
+    z-index: 0;
+    min-height: 240px;
+    padding: 22px 20px 18px;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    overflow: hidden;
+    clip-path: polygon(0 0, 92% 0, 100% 10%, 100% 100%, 0 100%);
+    transition:
+            transform 0.22s ease,
+            box-shadow 0.22s ease;
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    clip-path: inherit;
+    background: var(--border);
+    z-index: -2;
+    pointer-events: none;
+}
+
+.card::after {
+    content: "";
+    position: absolute;
+    inset: 2px;
+    clip-path: inherit;
+    background:
+            linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent),
+            var(--bg-soft);
+    z-index: -1;
+    pointer-events: none;
+    transition: opacity 0.22s ease, background 0.22s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow:
+            0 20px 50px rgba(0, 0, 0, 0.58),
+            0 0 0 1px rgba(255, 42, 42, 0.08),
+            0 0 24px rgba(255, 42, 42, 0.08);
+}
+
+.card:hover::before {
+    background: rgba(255, 42, 42, 0.34);
+}
+
+.card:hover::after {
+    background:
+            linear-gradient(135deg, transparent 0 44%, rgba(255, 42, 42, 0.06) 50%, transparent 56% 100%),
+            linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent),
+            var(--bg-soft);
+}
+
+.card h4 {
+    margin: 0 0 10px;
+    font-size: 1.35rem;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    text-transform: lowercase;
+}
+
+.card p {
+    margin: 0;
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    line-height: 1.65;
+    max-width: 22ch;
+}
+
+.card a {
+    position: absolute;
+    left: 20px;
+    bottom: 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--red);
+    text-decoration: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.92rem;
+    letter-spacing: 0.04em;
+    transition: transform 0.18s ease, color 0.18s ease;
+}
+
+.card a::after {
+    content: "›";
+    transition: transform 0.18s ease;
+}
+
+.card a:hover,
+.card a:focus-visible {
+    transform: translateX(2px);
+    outline: none;
+}
+
+.card a:hover::after,
+.card a:focus-visible::after {
+    transform: translateX(2px);
+}
+
+/* PANELS */
+.panels {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr 1fr;
+    gap: 18px;
+    margin-top: 64px;
+}
+
+.panel {
+    position: relative;
+    padding: 20px 20px 18px;
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    font-family: 'JetBrains Mono', monospace;
+    overflow: hidden;
+    min-height: 220px;
+}
+
+.panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
+    pointer-events: none;
+}
+
+.panel h5 {
+    margin: 0 0 14px;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.log div {
+    margin: 8px 0;
+    color: var(--text-dim);
+    font-size: 0.95rem;
+}
+
+.log div::before {
+    content: ">";
+    color: var(--red);
+    margin-right: 10px;
+}
+
+.quote {
+    color: var(--red);
+    font-size: 1rem;
+    line-height: 1.9;
+    letter-spacing: 0.02em;
+    margin-top: 6px;
+}
+
+/* GLITCH */
+.glitch {
+    position: relative;
+}
+
+.glitch:hover {
+    text-shadow:
+            1px 0 rgba(255, 42, 42, 0.8),
+            -1px 0 rgba(0, 200, 255, 0.45);
+    animation: glitch-flicker 0.22s linear infinite alternate;
+}
+
+@keyframes glitch-flicker {
+    from { transform: translateX(0); }
+    to { transform: translateX(0.5px); }
+}
+
+/* FOOTER */
+footer {
+    margin-top: 80px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    letter-spacing: 0.04em;
+}
+
+footer > div:last-child {
+    color: var(--text-faint);
+}
+
+/* RESPONSIVE */
+@media (max-width: 1100px) {
+    .hero {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+
+    .fox {
+        margin-left: 0;
+        width: min(100%, 360px);
+    }
+
+    .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .panels {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 720px) {
+    .container {
+        width: min(100% - 20px, 1200px);
+        padding-top: 24px;
+    }
+
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    nav {
+        gap: 8px 14px;
+    }
+
+    .hero {
+        margin-top: 42px;
+        min-height: auto;
+    }
+
+    .hero h1 {
+        font-size: clamp(2.4rem, 12vw, 4rem);
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .card {
+        min-height: 210px;
+    }
+
+    footer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* начальное состояние */
+.reveal {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+    filter: blur(6px);
+}
+
+/* когда активируется */
+.reveal.show {
+    animation: revealAnim 0.6s cubic-bezier(.2,.8,.2,1) forwards;
+    animation-delay: var(--delay, 0ms);
+}
+
+@keyframes revealAnim {
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}

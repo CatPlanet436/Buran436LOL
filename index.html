@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>/usr/buran</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="styles/style.css" rel="stylesheet">
+
+  <style>
+
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <header class="reveal">
+    <div class="logo">/usr/buran</div>
+    <nav>
+      <a href="#">home</a>
+      <a href="#">projects</a>
+      <a href="#">log</a>
+      <a href="#">system</a>
+    </nav>
+  </header>
+
+  <section class="hero reveal">
+    <div>
+      <p>// welcome</p>
+      <h1 class="glitch">hi, i'm <span>buran</span></h1>
+      <p>frontend developer/cool guy<br>clean code. weird ideas. digital fox.</p>
+
+      <div class="status" data-text="STATUS: ONLINE">STATUS: ONLINE</div>
+    </div>
+
+    <div class="fox"><img src="imgs/Без%20названия934_20250813210406.png" alt=""></div>
+  </section>
+
+  <section class="modules">
+    <h3>// modules</h3>
+
+    <div class="grid">
+      <div class="card reveal">
+        <h4>projects</h4>
+        <p>things i've built and shipped</p>
+        <a href="#">access ></a>
+      </div>
+
+      <div class="card reveal">
+        <h4>log</h4>
+        <p>thoughts, notes, experiments</p>
+        <a href="#">access ></a>
+      </div>
+
+      <div class="card reveal">
+        <h4>system</h4>
+        <p>my setup and tools</p>
+        <a href="#">access ></a>
+      </div>
+
+      <div class="card reveal">
+        <h4>about</h4>
+        <p>who i am and what i do</p>
+        <a href="#">access ></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="panels">
+
+    <div class="panel reveal">
+      <h5>// user status</h5>
+      <div>user: buran</div>
+      <div>role: developer</div>
+      <div>energy: 78%</div>
+      <div>coffee: 2 cups</div>
+    </div>
+
+    <div class="panel log reveal">
+      <h5>// activity log</h5>
+      <div> pushed commit</div>
+      <div> updated site</div>
+      <div> learned something</div>
+      <div> broke something</div>
+    </div>
+
+    <div class="panel reveal">
+      <h5>// quote</h5>
+      <div class="quote">
+        code is like humor.<br>
+        when you have to explain it,<br>
+        it's bad.
+      </div>
+    </div>
+
+  </section>
+
+  <footer>
+    <div>ARASAKA.NET</div>
+    <div>© 2026 buran</div>
+    <img class="stamp" src="badges/cesarean_transparent.png" alt="stamp">
+  </footer>
+
+</div>
+
+<script>
+    const elements = document.querySelectorAll('.reveal');
+
+    elements.forEach((el, i) => {
+        el.style.setProperty('--delay', `${i * 120}ms`);
+    });
+
+    window.addEventListener('load', () => {
+        elements.forEach(el => el.classList.add('show'));
+    });
+</script>
+
+</body>
+</html>
