@@ -12,26 +12,75 @@
 
   </style>
 </head>
+<!-- PROJECTS -->
+<div class="modal" id="modal-projects">
+  <div class="modal__backdrop" data-close></div>
+  <div class="modal__content">
+    <button class="modal__close" data-close>×</button>
+    <h3>// projects</h3>
+    <div class="specs">
+      <div>my cool project 1</div>
+      <div>my cool project 2</div>
+      <div>my cool project 3</div>
+    </div>
+  </div>
+</div>
 
+<!-- LOG -->
+<div class="modal" id="modal-log">
+  <div class="modal__backdrop" data-close></div>
+  <div class="modal__content">
+    <button class="modal__close" data-close>×</button>
+    <h3>// log</h3>
+    <div class="specs">
+      <div>> started something</div>
+      <div>> broke something</div>
+      <div>> fixed something</div>
+    </div>
+  </div>
+</div>
+<div class="modal" id="modal-system" aria-hidden="true">
+  <div class="modal__backdrop" data-close></div>
+
+  <div class="modal__content" role="dialog" aria-modal="true" aria-labelledby="system-title">
+    <button class="modal__close" type="button" data-close>×</button>
+
+    <h3 id="system-title">// system specs</h3>
+
+    <div class="specs">
+      <div><span>cpu:</span> AMD Ryzen 7 7800X3D</div>
+      <div><span>gpu:</span> RTX 5070 OC</div>
+      <div><span>ram:</span> 32GB DDR5</div>
+      <div><span>storage:</span> 2000GB NVMe [7400/6400 MB/s]</div>
+      <div><span>os:</span> Windows 11</div>
+    </div>
+  </div>
+</div>
+<div class="modal" id="modal-about">
+  <div class="modal__backdrop" data-close></div>
+  <div class="modal__content">
+    <button class="modal__close" data-close>×</button>
+    <h3>// about</h3>
+    <div class="specs">
+      <div>frontend dev</div>
+      <div>fox energy</div>
+      <div>building stuff</div>
+    </div>
+  </div>
+</div>
 <body>
 
 <div class="container">
 
   <header class="reveal">
     <div class="logo">/usr/buran</div>
-    <nav>
-      <a href="#">home</a>
-      <a href="#">projects</a>
-      <a href="#">log</a>
-      <a href="#">system</a>
-    </nav>
   </header>
 
   <section class="hero reveal">
     <div>
       <p>// welcome</p>
       <h1 class="glitch">hi, i'm <span>buran</span></h1>
-      <p>frontend developer/cool guy<br>clean code. weird ideas. digital fox.</p>
+      <p>frontend developer/cool guy<br>the maniac fox</p>
 
       <div class="status" data-text="STATUS: ONLINE">STATUS: ONLINE</div>
     </div>
@@ -46,25 +95,25 @@
       <div class="card reveal">
         <h4>projects</h4>
         <p>things i've built and shipped</p>
-        <a href="#">access ></a>
+        <a href="#" data-modal="projects">access ></a>
       </div>
 
       <div class="card reveal">
         <h4>log</h4>
         <p>thoughts, notes, experiments</p>
-        <a href="#">access ></a>
+        <a href="#" data-modal="log">access ></a>
       </div>
 
       <div class="card reveal">
         <h4>system</h4>
         <p>my setup and tools</p>
-        <a href="#">access ></a>
+        <a href="#" data-modal="system">access ></a>
       </div>
 
       <div class="card reveal">
         <h4>about</h4>
         <p>who i am and what i do</p>
-        <a href="#">access ></a>
+        <a href="#" data-modal="about">access ></a>
       </div>
     </div>
   </section>
@@ -75,16 +124,17 @@
       <h5>// user status</h5>
       <div>user: buran</div>
       <div>role: developer</div>
-      <div>energy: 78%</div>
+      <div>energy: 67%</div>
       <div>coffee: 2 cups</div>
     </div>
 
     <div class="panel log reveal">
       <h5>// activity log</h5>
-      <div> pushed commit</div>
-      <div> updated site</div>
-      <div> learned something</div>
-      <div> broke something</div>
+      <div>woke up</div>
+      <div>drank coffee</div>
+      <div>played cs</div>
+      <div>questioned life</div>
+      <div>went to sleep</div>
     </div>
 
     <div class="panel reveal">
@@ -115,6 +165,38 @@
 
     window.addEventListener('load', () => {
         elements.forEach(el => el.classList.add('show'));
+    });
+
+    const buttons = document.querySelectorAll('[data-modal]');
+    const modals = document.querySelectorAll('.modal');
+
+    buttons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            const id = btn.dataset.modal;
+            const modal = document.getElementById(`modal-${id}`);
+
+            if (modal) {
+                modal.classList.add('open');
+            }
+        });
+    });
+
+    modals.forEach(modal => {
+        const closers = modal.querySelectorAll('[data-close]');
+
+        closers.forEach(el => {
+            el.addEventListener('click', () => {
+                modal.classList.remove('open');
+            });
+        });
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            modals.forEach(m => m.classList.remove('open'));
+        }
     });
 </script>
 
