@@ -777,3 +777,11 @@ footer > div:last-child {
     transform: scale(1.5);
     filter: brightness(1.1);
 }
+.badges-row span {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
