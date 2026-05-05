@@ -200,7 +200,7 @@
   </footer>
 
 </div>
-
+<div id="cursor"></div>
 <script>
     const elements = document.querySelectorAll('.reveal');
 
@@ -245,5 +245,46 @@
     });
 </script>
 
+<script>
+    const cursor = document.getElementById('cursor');
+
+    let mouseX = 0, mouseY = 0;
+    let cursorX = 0, cursorY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+
+    function animateCursor() {
+        cursorX += (mouseX - cursorX) * 0.15;
+        cursorY += (mouseY - cursorY) * 0.15;
+
+        cursor.style.left = cursorX + 'px';
+        cursor.style.top = cursorY + 'px';
+
+        requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    document.addEventListener('click', (e) => {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+        const ripple = document.createElement('span');
+        ripple.className = 'ripple';
+        ripple.style.left = e.clientX + 'px';
+        ripple.style.top = e.clientY + 'px';
+        ripple.style.width = ripple.style.height = '10px';
+        document.body.appendChild(ripple);
+
+        setTimeout(() => ripple.remove(), 600);
+    });
+
+    const interactives = document.querySelectorAll('a, button, .card, [data-modal], .link-card, .modal__close');
+    interactives.forEach(el => {
+        el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+        el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+    });
+</script>
 </body>
 </html>
