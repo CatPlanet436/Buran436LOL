@@ -740,3 +740,40 @@ footer > div:last-child {
     transform: scale(1.1);
     opacity: 1;
 }
+
+.badges {
+    margin-top: 64px;
+}
+
+.badges h3 {
+    margin: 0 0 18px;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.badges-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.badges-row a {
+    display: inline-block;
+    line-height: 0;
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.badges-row img {
+    width: 88px;
+    height: 31px;
+    image-rendering: pixelated;
+    display: block;
+}
+
+.badges-row a:hover {
+    transform: scale(1.5);
+    filter: brightness(1.1);
+}
