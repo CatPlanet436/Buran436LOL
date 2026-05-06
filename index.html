@@ -23,7 +23,8 @@
     <button class="modal__close" data-close>×</button>
     <h3>// projects</h3>
     <div class="specs">
-      <div>there's nothing here yet, for now</div>
+      <div>Telegram pet-bot Furrenysh</div>
+      <div>ISDMOS (WIP) - 2D Unity Game</div>
     </div>
   </div>
 </div>
@@ -64,9 +65,11 @@
     <button class="modal__close" data-close>×</button>
     <h3>// about</h3>
     <div class="specs">
-      <div>frontend dev</div>
-      <div>fox energy</div>
-      <div>building stuff</div>
+      <div>I’m a furry fox from Moscow. A self-taught programmer, game developer, and frontend developer.
+        I work with HTML, CSS, and JavaScript, and I’m currently learning React.</div>
+      <div>I’m actively learning English and exploring different directions in development to find what suits me best. I haven’t worked anywhere yet.</div>
+      <div>I build websites, games, and Telegram bots. I don’t have many finished projects because I often delete them after completing them :3</div>
+      <div>I love Monster Energy and coffee. Feel free to message me, I’m always happy to reply.</div>
     </div>
   </div>
 </div>
@@ -94,28 +97,28 @@
     <h3>// modules</h3>
 
     <div class="grid">
-      <div class="card reveal">
+      <div class="card reveal" data-modal="projects">
         <h4>projects</h4>
         <p>things i've built and shipped</p>
-        <a href="#" data-modal="projects">access ></a>
+        <a href="#">access ></a>
       </div>
 
-      <div class="card reveal">
+      <div class="card reveal" data-modal="log">
         <h4>log</h4>
         <p>thoughts, notes, experiments</p>
-        <a href="#" data-modal="log">access ></a>
+        <a href="#">access ></a>
       </div>
 
-      <div class="card reveal">
+      <div class="card reveal" data-modal="system">
         <h4>system</h4>
         <p>my setup and tools</p>
-        <a href="#" data-modal="system">access ></a>
+        <a href="#">access ></a>
       </div>
 
-      <div class="card reveal">
+      <div class="card reveal" data-modal="about">
         <h4>about</h4>
         <p>who i am and what i do</p>
-        <a href="#" data-modal="about">access ></a>
+        <a href="#">access ></a>
       </div>
     </div>
   </section>
@@ -217,7 +220,9 @@
 
     buttons.forEach(btn => {
         btn.addEventListener('click', (e) => {
-            e.preventDefault();
+            if (e.target.closest('a')) {
+                e.preventDefault();
+            }
 
             const id = btn.dataset.modal;
             const modal = document.getElementById(`modal-${id}`);
@@ -230,7 +235,6 @@
 
     modals.forEach(modal => {
         const closers = modal.querySelectorAll('[data-close]');
-
         closers.forEach(el => {
             el.addEventListener('click', () => {
                 modal.classList.remove('open');
@@ -247,25 +251,10 @@
 
 <script>
     const cursor = document.getElementById('cursor');
-
-    let mouseX = 0, mouseY = 0;
-    let cursorX = 0, cursorY = 0;
-
     document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
     });
-
-    function animateCursor() {
-        cursorX += (mouseX - cursorX) * 0.15;
-        cursorY += (mouseY - cursorY) * 0.15;
-
-        cursor.style.left = cursorX + 'px';
-        cursor.style.top = cursorY + 'px';
-
-        requestAnimationFrame(animateCursor);
-    }
-    animateCursor();
 
     document.addEventListener('click', (e) => {
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
